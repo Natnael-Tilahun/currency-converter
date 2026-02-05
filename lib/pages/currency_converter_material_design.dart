@@ -17,6 +17,12 @@ class _Currencyconverterhomemd extends State<Currencyconverterhomemd> {
   }
 
   @override
+  void dispose() {
+    textEditingController.dispose(); // TODO: implement dispose
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final border = OutlineInputBorder(
       borderSide: BorderSide(

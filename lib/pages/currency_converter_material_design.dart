@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
 
-class Currencyconverterhomemd extends StatelessWidget {
+class Currencyconverterhomemd extends StatefulWidget {
   const Currencyconverterhomemd({super.key});
+
+  @override
+  State<Currencyconverterhomemd> createState() => _Currencyconverterhomemd();
+}
+
+class _Currencyconverterhomemd extends State<Currencyconverterhomemd> {
+  double result = 0;
+  final TextEditingController textEditingController = TextEditingController();
+
+  void convert() {
+    result = double.parse(textEditingController.text) * 152;
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,26 +30,30 @@ class Currencyconverterhomemd extends StatelessWidget {
       backgroundColor: Colors.black,
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text('Currency Currency', style: TextStyle(color: Colors.white)),
+        title: Text(
+          'Currency Converter',
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              '0',
-              style: TextStyle(
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
-                fontSize: 45,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            spacing: 10,
+            children: [
+              Text(
+                '${result != 0 ? result.toStringAsFixed(3) : result.toStringAsFixed(0)} ETB',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 45,
+                ),
               ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
+              TextField(
                 style: const TextStyle(color: Colors.white),
                 decoration: InputDecoration(
-                  hintText: 'Please enter the amount in Birr',
+                  hintText: 'Please enter the amount in USD',
                   hintStyle: TextStyle(color: Colors.blueGrey),
                   prefixIcon: Icon(Icons.monetization_on_outlined),
                   prefixIconColor: Colors.white,
@@ -45,14 +62,10 @@ class Currencyconverterhomemd extends StatelessWidget {
                   enabledBorder: border,
                 ),
                 keyboardType: TextInputType.numberWithOptions(decimal: true),
+                controller: textEditingController,
               ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(10.0),
-              child: ElevatedButton(
-                onPressed: () {
-                  print('Button clicked');
-                },
+              ElevatedButton(
+                onPressed: convert,
                 style: TextButton.styleFrom(
                   backgroundColor: Colors.indigoAccent,
                   foregroundColor: Colors.white,
@@ -66,8 +79,16 @@ class Currencyconverterhomemd extends StatelessWidget {
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
                 ),
               ),
-            ),
-          ],
+
+              SizedBox(
+                width: double.infinity,
+                child: Text(
+                  '1 USD = 152 Birr',
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
